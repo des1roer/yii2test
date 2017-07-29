@@ -11,6 +11,8 @@ use yii\web\Response;
 
 class UnitController extends ActiveController
 {
+    public $allowedActions = ['index', 'view', 'update', 'create', 'delete'];
+
     public function behaviors()
     {
         $behaviors = parent::behaviors();
@@ -24,7 +26,6 @@ class UnitController extends ActiveController
                 'corsFilter' => [
                     'class' => \yii\filters\Cors::className(),
                     'cors' => [
-                        'Origin' => [Yii::$app->params['allowDomains']],
                         'Access-Control-Request-Method' => ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
                         'Access-Control-Request-Headers' => ['X-Wsse'],
                         'Access-Control-Allow-Credentials' => true,
