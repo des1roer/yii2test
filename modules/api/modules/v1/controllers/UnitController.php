@@ -54,7 +54,7 @@ class UnitController extends ActiveController
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
-                        '*' => ['post','get'],
+                        '*' => ['post','get', 'delete', 'patch'],
                     ],
                 ],
             ]

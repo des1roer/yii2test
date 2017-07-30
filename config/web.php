@@ -47,7 +47,7 @@ $config = [
             // Disable r= routes
             'enablePrettyUrl' => true,
             'rules' => array(
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'api/unit'],
+                ['class' => 'yii\rest\UrlRule', 'controller' => ['api/unit'], 'pluralize' => false],
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
