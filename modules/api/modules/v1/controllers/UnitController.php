@@ -6,7 +6,6 @@ use app\models\Unit;
 use yii\rest\ActiveController;
 use yii\helpers\ArrayHelper;
 use yii\web\Response;
-use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 
 class UnitController extends ActiveController
@@ -41,20 +40,11 @@ class UnitController extends ActiveController
                     'class' => 'yii\filters\HttpCache',
                     'only' => ['index', 'view'],
                 ],
-//                'access' => [
-//                    'class' => AccessControl::className(),
-//                    'rules' => [
-//                        [
-//                            'actions' => ['*'],
-//                            'allow' => true,
-//                            'roles' => ['*'],
-//                        ]
-//                    ],
-//                ],
                 'verbs' => [
-                    'class' => VerbFilter::className(),
+                    'class' => VerbFilter::class,
                     'actions' => [
-                        '*' => ['post','get', 'delete', 'patch'],
+                        '*' => ['post','get', 'delete'],
+                        'update'=>['PUT'],
                     ],
                 ],
             ]
