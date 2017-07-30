@@ -4,10 +4,10 @@ namespace app\modules\api\modules\v1\controllers;
 
 use app\models\Unit;
 use yii\rest\ActiveController;
-use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
-use Yii;
 use yii\web\Response;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 
 class UnitController extends ActiveController
 {
@@ -17,15 +17,13 @@ class UnitController extends ActiveController
     {
         $behaviors = parent::behaviors();
 
-        // remove unused filters added by parent REST Controller
-        unset($behaviors['rateLimiter'], $behaviors['authenticator']);
-
         $behaviors = ArrayHelper::merge(
             $behaviors,
             [
                 'corsFilter' => [
                     'class' => \yii\filters\Cors::className(),
                     'cors' => [
+                        'Origin' => ['*'],
                         'Access-Control-Request-Method' => ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
                         'Access-Control-Request-Headers' => ['X-Wsse'],
                         'Access-Control-Allow-Credentials' => true,
@@ -42,6 +40,22 @@ class UnitController extends ActiveController
                     'enabled' => YII_DEBUG,
                     'class' => 'yii\filters\HttpCache',
                     'only' => ['index', 'view'],
+                ],
+//                'access' => [
+//                    'class' => AccessControl::className(),
+//                    'rules' => [
+//                        [
+//                            'actions' => ['*'],
+//                            'allow' => true,
+//                            'roles' => ['*'],
+//                        ]
+//                    ],
+//                ],
+                'verbs' => [
+                    'class' => VerbFilter::className(),
+                    'actions' => [
+                        '*' => ['post','get'],
+                    ],
                 ],
             ]
         );
