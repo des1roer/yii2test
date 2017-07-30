@@ -47,16 +47,12 @@ $config = [
             // Disable r= routes
             'enablePrettyUrl' => true,
             'rules' => array(
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'api/unit'],
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'api/unit'],
             ),
         ],
-//        'response' => [
-//            'format' => yii\web\Response::FORMAT_JSON,
-//            'charset' => 'UTF-8',
-//        ],
     ],
     'modules' => [
         'api' => [
