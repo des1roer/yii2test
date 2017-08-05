@@ -40,14 +40,14 @@ $config = [
         ],
         'db' => $db,
         'urlManager' => [
-            'class' => 'yii\web\UrlManager',
             // Disable index.php
             'showScriptName' => false,
             'enableStrictParsing' => true,
             // Disable r= routes
             'enablePrettyUrl' => true,
             'rules' => array(
-                ['class' => 'yii\rest\UrlRule', 'controller' => ['api/unit'], 'pluralize' => false],
+                ['class' => 'yii\rest\UrlRule', 'controller' => ['api/v1/unit'], 'pluralize' => false],
+                ['class' => 'yii\rest\UrlRule', 'controller' => ['api_v1/unit'], 'pluralize' => false],
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
@@ -56,6 +56,14 @@ $config = [
     ],
     'modules' => [
         'api' => [
+            'class' => 'app\modules\api\Module',
+            'modules' => [
+                'v1' => [
+                    'class' => 'app\modules\api\modules\v1\Module',
+                ],
+            ],
+        ],
+        'api_v1' => [
             'class' => 'app\modules\api\modules\v1\Module',
         ],
     ],
