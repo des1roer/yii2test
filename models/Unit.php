@@ -40,6 +40,21 @@ class Unit extends \yii\db\ActiveRecord
         ];
     }
 
+    public function extraFields()
+    {
+        return [
+            'items' => function () {
+                return $this->id;
+            },
+            'parentApi'
+        ];
+    }
+
+    public function getParentApi()
+    {
+        return self::find()->where(['id' => $this->parent_id])->one();
+    }
+
     /**
      * @inheritdoc
      */
